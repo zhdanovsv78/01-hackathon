@@ -7,6 +7,20 @@ import { ShapeModule } from '@/modules/shape.module';
 
 console.log('working');
 
+window.originalSetTimeout = window.setTimeout;
+window.originalClearTimeout = window.clearTimeout;
+window.activeTimers = 0;
+
+window.setTimeout = function (func, delay) {
+  window.activeTimers++;
+  return window.originalSetTimeout(func, delay);
+};
+
+window.clearTimeout = function (timerID) {
+  window.activeTimers--;
+  window.originalClearTimeout(timerID);
+};
+
 //CREATE MENU
 const menu = new ContextMenu('ul');
 
@@ -32,6 +46,7 @@ menu.open();
 //MENU CLICK LOGIC
 menu.el.addEventListener('click', (event) => {
   if (event.target.nodeName === 'LI') {
+    module_3.prepareLayout();
     const clickedText = event.target.outerText;
     const clickedModule = modules.filter((element) => {
       return element.text === clickedText;
