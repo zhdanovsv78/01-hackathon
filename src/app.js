@@ -15,7 +15,7 @@ const menu = new ContextMenu('ul')
 
 //CREATE MODULES
 
-const module_1  = new TestModule ('a', 'Test module')
+const module_1  = new TestModule ('a', 'BURATINO!')
 const module_2  = new BackgroundModule ('a', 'Change color')
 const module_3  = new ClicksModule ('a', 'Count cliks (for 3 sec)')
 const module_4  = new ShapeModule ('a', 'Create a shape')
