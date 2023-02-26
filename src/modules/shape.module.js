@@ -40,6 +40,7 @@ export class ShapeModule extends Module {
 
 
 		const num = random(1, 3)
+		console.log(num)
 
 		switch (num) {
 			case 1:
@@ -77,6 +78,7 @@ export class ShapeModule extends Module {
 		setTimeout(() => {
 			const box = document.querySelector('#box1')
 			box.style.display = 'none'
+			box.style.borderRadius = ''
 		}, 2000)
 
 
