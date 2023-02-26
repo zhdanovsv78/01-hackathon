@@ -1,59 +1,85 @@
 import { Module } from '../core/module';
 
 export class ClicksModule extends Module {
-  timer() {
-    // timer logic
+	prepareLayout() {
+		Module.prepareLayout();
+	}
+	renderTimer() {
+		const container = document.getElementById('container');
+		const clicksTimer = document.createElement('h1');
+		clicksTimer.setAttribute('id', 'clicks-timer');
+		clicksTimer.setAttribute('class', 'clicks-timer');
+		const clicksAmount = document.createElement('h2');
+		clicksAmount.setAttribute('id', 'clicks-amount');
+		clicksAmount.setAttribute('class', 'clicks-amount');
 
-    const timer = document.querySelector('.clicks-timer');
-    timer.style.display = 'flex';
-    let timerCount = 3;
-    timer.innerHTML = `00:0${timerCount}`;
+		container.append(clicksTimer, clicksAmount);
+	}
 
-    const countDown = setInterval(() => {
-      timerCount--;
-      timer.innerHTML = `00:0${timerCount}`;
-      if (timerCount <= 0 && timerCount < 1) {
-        timerCount = 0;
-        clearInterval(countDown);
-      }
-    }, 1000);
+	removeTimerFromLayout() {
+		if (document.getElementById('clicks-timer')) {
+			document.getElementById('clicks-timer').remove();
+			document.getElementById('clicks-amount').remove();
+		}
+	}
 
-    setTimeout(() => {
-      timer.style.display = 'none';
-    }, 4000);
+	renderFinalResult() {
+		if (
+			!document.getElementById('final-result') &&
+			!document.getElementById('figure')
+		) {
+			const container = document.getElementById('container');
+			const finalResult = document.createElement('h2');
+			finalResult.setAttribute('id', 'final-result');
+			finalResult.setAttribute('class', 'final-result');
+			container.append(finalResult);
+		}
+	}
 
-    // clicks amount logic
+	removeFinalResult() {
+		if (document.getElementById('final-result')) {
+			document.getElementById('final-result').remove();
+		}
+	}
 
-    const clicksAmount = document.querySelector('.clicks-amount');
-    clicksAmount.style.display = 'block';
-    let clickCounter = 0;
-    document.body.addEventListener('click', () => {
-      clickCounter++;
-      clicksAmount.textContent = `Clicks amount: ${clickCounter}`;
-    });
+	timer() {
+		window.clearInterval(countDown);
+		this.removeTimerFromLayout();
+		this.removeFinalResult();
+		this.renderTimer();
 
-    setTimeout(() => {
-      clicksAmount.style.display = 'none';
+		// clicks amount logic
+		const clicksAmount = document.getElementById('clicks-amount');
+		let clickCounter = 0;
+		document.body.addEventListener('click', () => {
+			clickCounter++;
+			clicksAmount.textContent = `Clicks amount: ${clickCounter}`;
+		});
 
-      const resultClick = document.querySelector('.final-result');
-      resultClick.style.display = 'block';
-      resultClick.textContent = `YOUR RESULT IS ${clickCounter} CLICKS!`;
-    }, 4000);
+		// timer logic`
+		const clicksTimer = document.getElementById('clicks-timer');
+		clicksTimer.style.display = 'flex';
+		clicksTimer.innerHTML = '00:03';
 
-    setTimeout(() => {
-      const resultClick = document.querySelector('.final-result');
-      resultClick.style.display = 'none';
-    }, 7000);
-  }
+		let clicksTimerCount = 3;
 
-  trigger() {
+		const countDown = setInterval(() => {
+			clicksTimerCount--;
+			clicksTimer.innerHTML = `00:0${clicksTimerCount}`;
+			if (clicksTimerCount <= 0) {
+				clearInterval(countDown);
+				this.removeTimerFromLayout();
+				this.renderFinalResult();
+				const resultClick = document.getElementById('final-result');
+				if (resultClick) {
+					resultClick.textContent = `YOUR RESULT IS ${clickCounter} CLICKS!`;
+				}
+			}
+		}, 1000);
+	}
 
-    this.timer()
-    // const menu = document.querySelector('.menu');
-    // menu.addEventListener('click', () => {
-    //   this.timer();
-    //   const { target } = event;
-    //   console.log(target);
-    }
-  }
-
+	trigger() {
+		Module.prepareLayout();
+		this.timer();
+	}
+}
