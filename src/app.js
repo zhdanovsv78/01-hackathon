@@ -5,6 +5,7 @@ import { BackgroundModule } from '@/modules/background.module';
 import { ClicksModule } from '@/modules/clicks.module';
 import { ShapeModule } from '@/modules/shape.module';
 
+
 console.log('working');
 
 //CREATE MENU
@@ -14,10 +15,11 @@ const menu = new ContextMenu('ul');
 
 //CREATE MODULES
 
-const module_1  = new TestModule ('a', 'BURATINO!')
-const module_2  = new BackgroundModule ('a', 'Change color')
-const module_3  = new ClicksModule ('a', 'Count cliks (for 3 sec)')
-const module_4  = new ShapeModule ('a', 'Create a shape')
+const module_1 = new TestModule('a', 'Тестовый модуль Буратино!')
+const module_2 = new BackgroundModule('a', 'Изменить цвет фона')
+const module_3 = new ClicksModule('a', 'Подсчет кликов (за 3 сек)')
+const module_4 = new ShapeModule('a', 'Создание фигур')
+
 const modules = [module_1, module_2, module_3, module_4]
 
 // ADD MODULES TO MENU IN HTML
@@ -31,18 +33,18 @@ menu.open();
 
 //MENU CLICK LOGIC
 menu.el.addEventListener('click', (event) => {
-  if (event.target.nodeName === 'LI') {
-    const clickedText = event.target.outerText;
-    const clickedModule = modules.filter((element) => {
-      return element.text === clickedText;
-    });
-    // console.log('clickedModule', clickedModule)
+	if (event.target.nodeName === 'LI') {
+		const clickedText = event.target.outerText;
+		const clickedModule = modules.filter((element) => {
+			return element.text === clickedText;
+		});
+		// console.log('clickedModule', clickedModule)
 
-    // TRIGGER LOGIC SHOULD BE HERE. TODO: trigger function
+		// TRIGGER LOGIC SHOULD BE HERE. TODO: trigger function
 
-    clickedModule[0].trigger();
-    menu.close();
-  }
+		clickedModule[0].trigger();
+		menu.close();
+	}
 });
 
 // menu.close()
