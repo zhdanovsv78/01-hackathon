@@ -23,7 +23,7 @@ export class TestModule extends Module {
 
             clearInterval(myInterval)
             document.body.style.background = 'white';
-            document.body.remove(img)
+            img.remove()
 
         }
         setTimeout( () =>{myStopFunction() }, 10000)

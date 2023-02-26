@@ -20,5 +20,7 @@ export class ContextMenu extends Menu {
     this.el.className = 'menu';
   }
 
-  add() {}
+  add(module) {
+    this.el.insertAdjacentHTML("beforeend", module.toHTML());
+  }
 }
