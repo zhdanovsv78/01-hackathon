@@ -36,6 +36,7 @@ export class ClicksModule extends Module {
       clicksAmount.style.display = 'none';
 
       const resultClick = document.querySelector('.final-result');
+      resultClick.style.display = 'block';
       resultClick.textContent = `YOUR RESULT IS ${clickCounter} CLICKS!`;
     }, 4000);
 
@@ -46,11 +47,13 @@ export class ClicksModule extends Module {
   }
 
   trigger() {
-    const menu = document.querySelector('.menu');
-    menu.addEventListener('click', () => {
-      this.timer();
-      const { target } = event;
-      console.log(target);
-    });
+
+    this.timer()
+    // const menu = document.querySelector('.menu');
+    // menu.addEventListener('click', () => {
+    //   this.timer();
+    //   const { target } = event;
+    //   console.log(target);
+    }
   }
-}
+
