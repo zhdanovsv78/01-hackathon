@@ -1,4 +1,5 @@
 import { Module } from '../core/module';
+import { getRandomColor } from '../core/functions'
 
 export class ShapeModule extends Module {
 	createRandomFigureAndDeletePrevious() {
@@ -10,7 +11,7 @@ export class ShapeModule extends Module {
 
 		figure.setAttribute('id', `figure`);
 
-		figure.style.backgroundColor = this.setRandomColor();
+		figure.style.backgroundColor = getRandomColor();
 		this.setRandomSize(figure);
 		figure.style.position = 'absolute';
 		this.setRandomPosition(figure);
@@ -24,17 +25,6 @@ export class ShapeModule extends Module {
 
 		element.style.top = top + 'px';
 		element.style.left = left + 'px';
-	}
-
-	setRandomColor() {
-		{
-			const letters = '0123456789ABCDEF';
-			let color = '#';
-			for (let i = 0; i < 6; i++) {
-				color += letters[Math.floor(Math.random() * 16)];
-			}
-			return color;
-		}
 	}
 
 	setRandomSize(element) {
