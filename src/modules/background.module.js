@@ -17,6 +17,7 @@ export class BackgroundModule extends Module {
 		container.append(title)
 		setTimeout(() => {
 			title.remove()
+			document.body.style.background = 'white'
 		}, 2000)
 
 	}
