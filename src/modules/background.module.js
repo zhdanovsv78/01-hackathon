@@ -8,7 +8,7 @@ export class BackgroundModule extends Module {
 		const bgColor = document.body.style.background = getRandomColor()
 
 		const title = document.createElement('h1')
-		title.textContent = `Текст фона изменен на ${bgColor}`
+		title.textContent = `Цвет фона изменен на ${bgColor}`
 		title.className = 'title_H1'
 
 		this.setTextColor(title, bgColor)
